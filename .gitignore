@@ -1,0 +1,13 @@
+# Datos de Kaggle (descargar manualmente)
+data/*.csv
+!data/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Submissions locales
+submission*.csv
