@@ -68,7 +68,7 @@ El análisis de impureza de Gini del `RandomForestClassifier` confirma cuantitat
 
 ## 5. Selección del Modelo de Entrega (Submission)
 
-Aunque la Regresión Logística obtuvo un $0.11\%$ más en exactitud media ($82.94\%$ vs $82.83\%$), **seleccionamos Random Forest como modelo oficial de entrega (`submission.csv`)** por tres motivos técnicos:
-1. **Menor Varianza ($\pm 1.00\%$ vs $\pm 2.08\%$):** Su dispersión a través de los pliegues es la mitad, lo que predice menor propensión a sorpresas o degradación en el leaderboard oculto de Kaggle.
-2. **Mayor Precisión ($80.47\%$ vs $78.74\%$):** Minimiza los falsos supervivientes, siendo más conservador y certero en sus asignaciones.
-3. **Distribución de Predicciones Realista:** En el conjunto de prueba (`test.csv` de 418 pasajeros), predijo una tasa de supervivencia del **$38.28\%$** (160 supervivientes y 258 fallecidos), perfectamente alineada con la tasa histórica observada en el desastre ($38.38\%$).
+Aunque la Regresión Logística obtuvo un +0.11% más en exactitud media (82.94% vs 82.83%), **seleccionamos Random Forest como modelo oficial de entrega (`submission.csv`)** por tres motivos técnicos:
+1. **Menor Varianza (±1.00% vs ±2.08%):** Su dispersión a través de los pliegues es la mitad, lo que predice menor propensión a sorpresas o degradación en el leaderboard oculto de Kaggle.
+2. **Mayor Precisión (80.47% vs 78.74%):** Minimiza los falsos supervivientes, siendo más conservador y certero en sus asignaciones.
+3. **Distribución de Predicciones Realista:** En el conjunto de prueba (`test.csv` de 418 pasajeros), predijo una tasa de supervivencia del **38.28%** (160 supervivientes y 258 fallecidos), perfectamente alineada con la tasa histórica observada en el desastre (38.38%).

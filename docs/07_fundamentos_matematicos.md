@@ -36,7 +36,7 @@ Para cada concepto se presentan dos perspectivas:
 ### A. La Mediana vs La Media (Tratamiento de `Age` y `Fare`)
 
 #### 💡 Para quien no sabe matemática:
-Si en un bar hay 5 personas que ganan \$1,000 al mes y entra Elon Musk (que gana \$100,000,000), el *salario promedio* da \$16,000,000. Pero nadie en ese bar gana 16 millones: la media fue destruida por un valor extremo (*outlier*). La **mediana**, en cambio, ordena a todos de menor a mayor y toma el número del medio (\$1,000), ignorando los extremos absurdos.
+Si en un bar hay 5 personas que ganan 1,000 dólares al mes y entra una persona con ingresos atípicos (que gana 100,000,000 de dólares), el *salario promedio* da 16,000,000 de dólares. Pero nadie en ese bar gana 16 millones: la media fue distorsionada por un valor extremo (*outlier*). La **mediana**, en cambio, ordena a todos de menor a mayor y toma el número del medio (1,000 dólares), ignorando los extremos atípicos.
 
 En el Titanic, el boleto promedio costaba £32, pero había pasajes de £512 y otros gratis (£0). La edad promedio de los niños con título `Master` era 4.5 años. Usar la media hubiera inflado las edades.
 
@@ -48,10 +48,8 @@ Sean $X = \{x_1, x_2, \dots, x_n\}$ variables aleatorias continuas ordenadas de 
   *Propiedad:* Minimiza la pérdida cuadrática $L_2$: $\arg\min_c \sum_{i=1}^n (x_i - c)^2$. Es altamente sensible a colas pesadas (asimetría o *skewness* positiva).
 
 * **Mediana ($Me$):**
-  $$Me(X) = \begin{cases} 
-  x_{\left(\frac{n+1}{2}\right)} & \text{si } n \text{ es impar} \\ 
-  \frac{1}{2}\left(x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}\right) & \text{si } n \text{ es par} 
-  \end{cases}$$
+  $$Me(X) = x_{\left(\frac{n+1}{2}\right)} \quad \text{si } n \text{ es impar}$$
+  $$Me(X) = \frac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}}{2} \quad \text{si } n \text{ es par}$$
   *Propiedad:* Minimiza la pérdida de desviación absoluta $L_1$: $\arg\min_c \sum_{i=1}^n |x_i - c|$. Es un estimador robusto con un punto de ruptura (*breakdown point*) del **50%**.
 
 #### 💻 En el código (`src/features.py`):
@@ -119,11 +117,11 @@ La Regresión Logística modela la probabilidad a posteriori de que un pasajero 
 
 #### 🔬 Rigor Formal:
 Partimos del concepto de **Odds** (posibilidad relativa):
-$$\operatorname{Odds}(p) = \frac{p}{1-p}$$
+$$\text{Odds}(p) = \frac{p}{1 - p}$$
 Aplicando el logaritmo natural obtenemos el **Logit** (Log-Odds):
-$$\operatorname{Logit}(p) = \ln\left(\frac{p}{1-p}\right) = \mathbf{w}^T \mathbf{x} + b = \sum_{j=1}^{22} w_j x_j + b$$
-Despejando la probabilidad $p = P(Y=1|\mathbf{x})$:
-$$P(Y=1|\mathbf{x}) = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$$
+$$\text{Logit}(p) = \ln\left(\frac{p}{1 - p}\right) = \mathbf{w}^T \mathbf{x} + b = \sum_{j=1}^{22} w_j x_j + b$$
+Despejando la probabilidad $p = P(Y=1 \mid \mathbf{x})$:
+$$P(Y=1 \mid \mathbf{x}) = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$$
 
 $$\sigma(z) = \frac{1}{1 + e^{-z}}, \quad \frac{d\sigma}{dz} = \sigma(z)(1 - \sigma(z))$$
 
@@ -181,19 +179,19 @@ $$(j^*, \theta^*) = \arg\max_{j, \theta} \Delta I_G(t, j, \theta)$$
 ¿Por qué Random Forest tuvo una dispersión de **$\pm 1.00\%$** frente al **$\pm 2.08\%$** de la Regresión Logística?
 
 #### 🔬 Demostración Teórica:
-Sea un ensamble de $B$ árboles de decisión individuales $T_1(x), T_2(x), \dots, T_B(x)$, cada uno con varianza individual $\sigma^2$ y una correlación promedio entre pares de árboles de $\rho = \operatorname{Corr}(T_i, T_j)$.
+Sea un ensamble de $B$ árboles de decisión individuales $T_1(x), T_2(x), \dots, T_B(x)$, cada uno con varianza individual $\sigma^2$ y una correlación promedio entre pares de árboles de $\rho = \text{Corr}(T_i, T_j)$.
 
 La varianza de la predicción promedio $\bar{T}(x) = \frac{1}{B} \sum_{b=1}^B T_b(x)$ es:
-$$\operatorname{Var}(\bar{T}(x)) = \operatorname{Var}\left(\frac{1}{B}\sum_{b=1}^B T_b\right) = \frac{1}{B^2} \sum_{b=1}^B \operatorname{Var}(T_b) + \frac{1}{B^2} \sum_{b \ne j} \operatorname{Cov}(T_b, T_j)$$
-$$\operatorname{Var}(\bar{T}(x)) = \frac{B \sigma^2}{B^2} + \frac{B(B-1)\rho \sigma^2}{B^2} = \frac{\sigma^2}{B} + \frac{B-1}{B} \rho \sigma^2$$
+$$\text{Var}(\bar{T}(x)) = \text{Var}\left(\frac{1}{B}\sum_{b=1}^B T_b\right) = \frac{1}{B^2} \sum_{b=1}^B \text{Var}(T_b) + \frac{1}{B^2} \sum_{b \ne j} \text{Cov}(T_b, T_j)$$
+$$\text{Var}(\bar{T}(x)) = \frac{B \sigma^2}{B^2} + \frac{B(B-1)\rho \sigma^2}{B^2} = \frac{\sigma^2}{B} + \frac{B-1}{B} \rho \sigma^2$$
 Reagrupando:
-$$\operatorname{Var}(\bar{T}(x)) = \rho \sigma^2 + \frac{1 - \rho}{B} \sigma^2$$
+$$\text{Var}(\bar{T}(x)) = \rho \sigma^2 + \frac{1 - \rho}{B} \sigma^2$$
 
 #### 🎯 Conclusiones del Teorema:
 1. Al aumentar el número de árboles $B \rightarrow \infty$, el segundo término $\frac{1-\rho}{B}\sigma^2 \rightarrow 0$.
 2. La varianza mínima irreducible queda determinada exclusivamente por $\rho \sigma^2$.
 3. Para reducir $\rho$ (la correlación entre árboles), Random Forest aplica dos técnicas de aleatorización:
-   * **Bagging:** Cada árbol se entrena sobre una muestra aleatoria con reemplazo ($63.2\%$ de datos únicos y $36.8\%$ fuera de bolsa o *Out-of-Bag*).
+   * **Bagging:** Cada árbol se entrena sobre una muestra aleatoria con reemplazo (63.2% de datos únicos y 36.8% fuera de bolsa o *Out-of-Bag*).
    * **Subespacio aleatorio de variables:** En cada división de nodo, solo evalúa un subconjunto aleatorio de $\approx \sqrt{d}$ variables.
 
 Esto reduce $\rho$ drásticamente y colapsa la varianza del ensamble a la mitad ($\pm 1.00\%$).
@@ -227,9 +225,9 @@ Se aproxima al menor de los dos valores si uno de ellos se desploma hacia cero. 
 
 ### Integral del Área bajo la Curva ROC (ROC-AUC = 87.43%)
 
-La curva ROC grafica la tasa de verdaderos positivos $\operatorname{TPR}(\tau)$ contra la tasa de falsos positivos $\operatorname{FPR}(\tau)$ para todos los umbrales de decisión posibles $\tau \in [0, 1]$.
+La curva ROC grafica la tasa de verdaderos positivos $\text{TPR}(\tau)$ contra la tasa de falsos positivos $\text{FPR}(\tau)$ para todos los umbrales de decisión posibles $\tau \in [0, 1]$.
 
 #### 🔬 Teorema Probabilístico del AUC:
 El área bajo la curva ROC equivale a la probabilidad de que el modelo asigne un puntaje de riesgo más alto a un sobreviviente tomado al azar que a un fallecido tomado al azar:
-$$\operatorname{AUC} = \int_0^1 \operatorname{TPR}(\operatorname{FPR}^{-1}(u)) \, du = P\left(f(X^+) > f(X^-)\right)$$
+$$\text{AUC} = \int_0^1 \text{TPR}(\text{FPR}^{-1}(u)) \, du = P(f(X^+) > f(X^-))$$
 Un **AUC de 87.43%** significa que si tomás un superviviente real y un fallecido al azar, en el **87.4% de los casos** el modelo le asignará mayor probabilidad de sobrevivir al que realmente sobrevivió.

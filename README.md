@@ -37,7 +37,7 @@ Evaluación realizada mediante **Stratified 5-Fold Cross Validation** sobre el c
 | **Random Forest Classifier (Ensamble)** | **82.83%** $\pm$ **1.00%** | **80.47%** | 73.07% | 76.49% | **87.43%** | **Seleccionado (Submission Oficial)** |
 
 ### 🏆 ¿Por qué Random Forest para la entrega oficial?
-Aunque la Regresión Logística obtuvo un $+0.11\%$ en exactitud promedio, **Random Forest redujo la varianza entre pliegues a la mitad ($\pm 1.00\%$ vs $\pm 2.08\%$)** y demostró una mayor **precisión (80.47%)**, garantizando mayor consistencia frente a datos no observados.
+Aunque la Regresión Logística obtuvo un +0.11% más en exactitud promedio, **Random Forest redujo la varianza entre pliegues a la mitad (±1.00% vs ±2.08%)** y demostró una mayor **precisión (80.47%)**, garantizando mayor consistencia frente a datos no observados.
 
 ---
 
