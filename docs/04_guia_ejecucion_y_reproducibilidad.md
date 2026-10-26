@@ -53,6 +53,11 @@ cd /mnt/ssd-kingston/proyectos/ciencia-datos/titanic-eda-kaggle
 python src/pipeline.py
 ```
 
+### Captura de Salida Real en Terminal:
+![Ejecución del Pipeline en Consola](../assets/pipeline_execution.png)
+
+*(Para un desglose conceptual exhaustivo línea por línea de esta salida, consultar [docs/06_interpretacion_salida_consola.md](06_interpretacion_salida_consola.md). Para el análisis de las fórmulas y fundamentos teóricos, ver [docs/07_fundamentos_matematicos.md](07_fundamentos_matematicos.md)).*
+
 ### Salida esperada en consola:
 * Mensajes con dimensiones de datos de entrada.
 * Lista de 22 variables calculadas tras One-Hot Encoding.

@@ -24,6 +24,11 @@ Predecir la supervivencia de los pasajeros del naufragio del RMS Titanic a parti
 
 ## 📊 Resultados Empíricos Observados
 
+### 📸 Ejecución del Pipeline en Consola
+![Ejecución del Pipeline en Consola](assets/pipeline_execution.png)
+
+*(Para la explicación didáctica línea por línea de esta salida, ver [docs/06_interpretacion_salida_consola.md](docs/06_interpretacion_salida_consola.md). Para el desglose riguroso de fórmulas y optimización, ver [docs/07_fundamentos_matematicos.md](docs/07_fundamentos_matematicos.md)).*
+
 Evaluación realizada mediante **Stratified 5-Fold Cross Validation** sobre el conjunto de entrenamiento:
 
 | Modelo | Accuracy ($\mu \pm \sigma$) | Precision | Recall | F1-Score | ROC-AUC | Estado |
@@ -56,6 +61,8 @@ Aunque la Regresión Logística obtuvo un $+0.11\%$ en exactitud promedio, **Ran
 
 ```
 titanic-eda-kaggle/
+├── assets/
+│   └── pipeline_execution.png  # Captura de ejecución real en terminal
 ├── data/
 │   ├── README.md               # Instrucciones de descarga de Kaggle
 │   ├── train.csv               # 891 registros (ignorado en git)
@@ -69,7 +76,9 @@ titanic-eda-kaggle/
 │   ├── 02_eda_hallazgos_y_patrones.md
 │   ├── 03_modelos_y_validacion.md
 │   ├── 04_guia_ejecucion_y_reproducibilidad.md
-│   └── 05_aprendizajes_tecnica_feynman.md
+│   ├── 05_aprendizajes_tecnica_feynman.md
+│   ├── 06_interpretacion_salida_consola.md
+│   └── 07_fundamentos_matematicos.md
 ├── notebooks/
 │   └── 01_eda_titanic.ipynb    # Notebook ejecutable con análisis visual
 ├── src/                        # Código modular de producción
@@ -137,6 +146,20 @@ jupyter notebook notebooks/01_eda_titanic.ipynb
 - [x] **Generación de Submissions:** Creación de `data/submission.csv` listo para subir a Kaggle.
 - [x] **Suite de Tests:** 10 pruebas unitarias con `pytest` en verde.
 - [x] **Documentación Técnica:** Manuales de arquitectura, EDA, modelos y técnica Feynman en `docs/`.
+
+---
+
+## 📚 Documentación Técnica Detallada
+
+El proyecto cuenta con 7 manuales exhaustivos que cubren desde la arquitectura hasta las fórmulas matemáticas:
+
+1. [**01. Arquitectura y Pipeline End-to-End**](docs/01_arquitectura_y_pipeline.md): Diseño modular, flujo de datos y aislamiento estricto contra Data Leakage.
+2. [**02. Hallazgos y Patrones del EDA**](docs/02_eda_hallazgos_y_patrones.md): Desglose estadístico y sociológico del naufragio (género, clase, familias, puertos).
+3. [**03. Modelos, Validación y Métricas**](docs/03_modelos_y_validacion.md): Comparación formal de Regresión Logística vs Random Forest e importancia de variables.
+4. [**04. Guía de Ejecución y Reproducibilidad**](docs/04_guia_ejecucion_y_reproducibilidad.md): Manual paso a paso para correr CLI, Jupyter y Pytest.
+5. [**05. Aprendizajes Clave (Técnica Feynman)**](docs/05_aprendizajes_tecnica_feynman.md): Explicación conceptual en lenguaje llano sin tecnicismos vacíos.
+6. [**06. Interpretación de Salida de Consola (Línea por Línea)**](docs/06_interpretacion_salida_consola.md): Análisis detallado de cada bloque, número y porcentaje del output de terminal con captura real.
+7. [**07. Fundamentos Matemáticos y Algorítmicos**](docs/07_fundamentos_matematicos.md): Fórmulas analíticas (Gini, Logit, Sigmoide, Descenso de Gradiente, Reducción de Varianza en Ensambles, F1 y ROC-AUC).
 
 ---
 
